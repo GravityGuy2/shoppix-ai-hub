@@ -64,9 +64,10 @@ export const Header = () => {
               </Link>
             </Button>
 
-            <Button variant="ghost" size="icon" className="hidden md:flex" asChild>
+            <Button variant="default" className="hidden md:flex gradient-primary" asChild>
               <Link to="/auth">
-                <User className="h-5 w-5" />
+                <User className="h-4 w-4 mr-2" />
+                Login / Sign Up
               </Link>
             </Button>
 
