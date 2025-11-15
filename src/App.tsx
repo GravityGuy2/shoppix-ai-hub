@@ -8,6 +8,9 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
+import DashboardOrders from "./pages/DashboardOrders";
+import DashboardWishlist from "./pages/DashboardWishlist";
 import About from "./pages/About";
 import BecomeVendor from "./pages/BecomeVendor";
 import Contact from "./pages/Contact";
@@ -33,6 +36,9 @@ const App = () => (
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/orders" element={<DashboardOrders />} />
+          <Route path="/dashboard/wishlist" element={<DashboardWishlist />} />
           <Route path="/about" element={<About />} />
           <Route path="/become-vendor" element={<BecomeVendor />} />
           <Route path="/contact" element={<Contact />} />

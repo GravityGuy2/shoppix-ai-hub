@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, User, Heart, Menu, X } from "lucide-react";
+import { ShoppingCart, Search, User, Heart, Menu, X, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const cartItemsCount = 0; // TODO: Connect to cart state
 
   const handleSearch = (e: React.FormEvent) => {
@@ -64,12 +73,38 @@ export const Header = () => {
               </Link>
             </Button>
 
-            <Button variant="default" className="hidden md:flex gradient-primary" asChild>
-              <Link to="/auth">
-                <User className="h-4 w-4 mr-2" />
-                Login / Sign Up
-              </Link>
-            </Button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden md:flex">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+                    My Account
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/dashboard/orders")}>
+                    My Orders
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/dashboard/wishlist")}>
+                    Wishlist
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={signOut}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button variant="default" className="hidden md:flex gradient-primary" asChild>
+                <Link to="/auth">
+                  <User className="h-4 w-4 mr-2" />
+                  Login / Sign Up
+                </Link>
+              </Button>
+            )}
 
             <Button
               variant="ghost"
@@ -100,21 +135,44 @@ export const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-2 border-t">
             <Link
-              to="/wishlist"
+              to="/dashboard/wishlist"
               className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
               onClick={() => setIsMenuOpen(false)}
             >
               <Heart className="h-5 w-5" />
               <span>Wishlist</span>
             </Link>
-            <Link
-              to="/auth"
-              className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <User className="h-5 w-5" />
-              <span>Account</span>
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <User className="h-5 w-5" />
+                  <span>My Account</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    signOut();
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth w-full text-left"
+                >
+                  <LogOut className="h-5 w-5" />
+                  <span>Sign Out</span>
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <User className="h-5 w-5" />
+                <span>Sign In</span>
+              </Link>
+            )}
           </div>
         )}
       </div>
