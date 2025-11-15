@@ -87,8 +87,8 @@ const ProductDetail = () => {
             </div>
 
             <div className="flex items-baseline gap-4">
-              <span className="text-5xl font-bold text-primary">$159.99</span>
-              <span className="text-2xl text-muted-foreground line-through">$249.99</span>
+              <span className="text-5xl font-bold text-primary">₦65,000</span>
+              <span className="text-2xl text-muted-foreground line-through">₦89,000</span>
               <Badge className="badge-sale">36% OFF</Badge>
             </div>
 

@@ -11,7 +11,7 @@ const Cart = () => {
     {
       id: "1",
       name: "Wireless Earbuds Pro",
-      price: 49.99,
+      price: 25000,
       quantity: 2,
       image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200",
       vendor: "TechGear",
@@ -19,7 +19,7 @@ const Cart = () => {
     {
       id: "2",
       name: "Smart Watch Series 5",
-      price: 199.99,
+      price: 98000,
       quantity: 1,
       image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200",
       vendor: "TimeZone",
@@ -27,8 +27,8 @@ const Cart = () => {
   ];
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = 10;
-  const tax = subtotal * 0.1;
+  const shipping = 5000;
+  const tax = subtotal * 0.075;
   const total = subtotal + shipping + tax;
 
   return (
@@ -74,10 +74,10 @@ const Cart = () => {
                       
                       <div className="text-right">
                         <p className="text-2xl font-bold text-primary">
-                          ${(item.price * item.quantity).toFixed(2)}
+                          ₦{(item.price * item.quantity).toLocaleString()}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          ${item.price.toFixed(2)} each
+                          ₦{item.price.toLocaleString()} each
                         </p>
                       </div>
                     </div>
@@ -94,20 +94,20 @@ const Cart = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-muted-foreground">
                     <span>Subtotal</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                    <span>₦{subtotal.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-muted-foreground">
                     <span>Shipping</span>
-                    <span>${shipping.toFixed(2)}</span>
+                    <span>₦{shipping.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-muted-foreground">
                     <span>Tax</span>
-                    <span>${tax.toFixed(2)}</span>
+                    <span>₦{Math.round(tax).toLocaleString()}</span>
                   </div>
                   <div className="h-px bg-border" />
                   <div className="flex justify-between text-xl font-bold">
                     <span>Total</span>
-                    <span className="text-primary">${total.toFixed(2)}</span>
+                    <span className="text-primary">₦{Math.round(total).toLocaleString()}</span>
                   </div>
                 </div>
 

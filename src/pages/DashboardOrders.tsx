@@ -109,7 +109,7 @@ const DashboardOrders = () => {
                           Placed on {new Date(order.created_at).toLocaleDateString()}
                         </p>
                         <p className="text-lg font-semibold text-primary">
-                          ${order.total_amount}
+                          ₦{parseFloat(order.total_amount).toLocaleString()}
                         </p>
                       </div>
                       {order.tracking_number && (

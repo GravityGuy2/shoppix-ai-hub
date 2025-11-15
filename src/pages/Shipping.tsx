@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Truck, Clock, Globe, DollarSign } from "lucide-react";
+import { Truck, Clock, Globe, Banknote } from "lucide-react";
 
 const Shipping = () => {
   return (
@@ -43,7 +43,7 @@ const Shipping = () => {
               </Card>
               <Card className="hover-lift">
                 <CardContent className="pt-6 text-center">
-                  <DollarSign className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <Banknote className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">Competitive Rates</h3>
                   <p className="text-sm text-muted-foreground">Best shipping prices</p>
                 </CardContent>
@@ -158,7 +158,7 @@ const Shipping = () => {
                     <li><strong>Customs duties and taxes:</strong> Determined by your country's customs office</li>
                     <li><strong>Import restrictions:</strong> Some items cannot be shipped to certain countries</li>
                     <li><strong>Longer delivery times:</strong> International shipping takes 10-21 business days</li>
-                    <li><strong>Currency conversion:</strong> Prices shown in USD, converted at checkout</li>
+                    <li><strong>Currency:</strong> All prices are shown in Nigerian Naira (₦)</li>
                   </ul>
                   <p>
                     You are responsible for any customs duties, taxes, or fees charged by your country. These charges are not included in the product or shipping cost.

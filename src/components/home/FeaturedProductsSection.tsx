@@ -4,7 +4,7 @@ const featuredProducts = [
   {
     id: "9",
     name: "Luxury Automatic Watch",
-    price: 599.99,
+    price: 295000,
     image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500",
     rating: 4.9,
     reviews: 456,
@@ -14,7 +14,7 @@ const featuredProducts = [
   {
     id: "10",
     name: "Noise Cancelling Headphones",
-    price: 159.99,
+    price: 78000,
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
     rating: 4.8,
     reviews: 1876,
@@ -23,7 +23,7 @@ const featuredProducts = [
   {
     id: "11",
     name: "Modern Table Lamp",
-    price: 79.99,
+    price: 38000,
     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500",
     rating: 4.7,
     reviews: 234,
@@ -33,7 +33,7 @@ const featuredProducts = [
   {
     id: "12",
     name: "Gaming Headset Pro",
-    price: 99.99,
+    price: 48000,
     image: "https://images.unsplash.com/photo-1599669454699-248893623440?w=500",
     rating: 4.8,
     reviews: 789,
@@ -42,7 +42,7 @@ const featuredProducts = [
   {
     id: "13",
     name: "Slim Fit Jeans",
-    price: 69.99,
+    price: 34000,
     image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500",
     rating: 4.6,
     reviews: 567,
@@ -51,7 +51,7 @@ const featuredProducts = [
   {
     id: "14",
     name: "Makeup Brush Set",
-    price: 49.99,
+    price: 24000,
     image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500",
     rating: 4.7,
     reviews: 891,
@@ -60,7 +60,7 @@ const featuredProducts = [
   {
     id: "15",
     name: "Baby Stroller Pro",
-    price: 299.99,
+    price: 145000,
     image: "https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=500",
     rating: 4.9,
     reviews: 345,
@@ -70,7 +70,7 @@ const featuredProducts = [
   {
     id: "16",
     name: "Bestseller Novel Collection",
-    price: 44.99,
+    price: 22000,
     image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500",
     rating: 4.8,
     reviews: 1234,
@@ -79,7 +79,7 @@ const featuredProducts = [
   {
     id: "17",
     name: "Wireless Gaming Mouse",
-    price: 79.99,
+    price: 38000,
     image: "https://images.unsplash.com/photo-1527814050087-3793815479db?w=500",
     rating: 4.7,
     reviews: 678,
@@ -89,7 +89,7 @@ const featuredProducts = [
   {
     id: "18",
     name: "Throw Pillow Set",
-    price: 34.99,
+    price: 17000,
     image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500",
     rating: 4.6,
     reviews: 432,
@@ -98,7 +98,7 @@ const featuredProducts = [
   {
     id: "19",
     name: "Sport Chronograph Watch",
-    price: 249.99,
+    price: 122000,
     image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500",
     rating: 4.8,
     reviews: 523,
@@ -107,7 +107,7 @@ const featuredProducts = [
   {
     id: "20",
     name: "Wooden Toy Set",
-    price: 59.99,
+    price: 29000,
     image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=500",
     rating: 4.7,
     reviews: 298,
