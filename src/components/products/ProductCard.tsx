@@ -93,11 +93,11 @@ export const ProductCard = ({
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <div className="text-2xl font-bold text-primary">
-              ${price.toFixed(2)}
+              ₦{price.toLocaleString()}
             </div>
             {originalPrice && originalPrice > price && (
               <div className="text-sm text-muted-foreground line-through">
-                ${originalPrice.toFixed(2)}
+                ₦{originalPrice.toLocaleString()}
               </div>
             )}
           </div>

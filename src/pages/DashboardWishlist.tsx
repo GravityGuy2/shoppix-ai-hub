@@ -124,7 +124,7 @@ const DashboardWishlist = () => {
                   <CardContent className="p-4">
                     <h3 className="font-semibold mb-2 line-clamp-2">{item.product_name}</h3>
                     <p className="text-lg font-bold text-primary mb-3">
-                      ${item.product_price}
+                      ₦{parseFloat(item.product_price).toLocaleString()}
                     </p>
                     <div className="flex gap-2">
                       <Button
