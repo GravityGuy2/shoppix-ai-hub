@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,11 +8,77 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Store, TrendingUp, Globe, HeadphonesIcon, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+
+const vendorSchema = z.object({
+  businessName: z.string().trim().min(1, "Business name is required").max(100, "Business name must be less than 100 characters"),
+  contactName: z.string().trim().min(1, "Contact name is required").max(100, "Contact name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number format"),
+  website: z.string().url("Invalid URL format").max(500, "URL must be less than 500 characters").optional().or(z.literal("")),
+  description: z.string().trim().min(1, "Description is required").max(1000, "Description must be less than 1000 characters"),
+});
 
 const BecomeVendor = () => {
+  const [businessName, setBusinessName] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement vendor application
+    
+    const result = vendorSchema.safeParse({
+      businessName,
+      contactName,
+      email,
+      phone,
+      website,
+      description,
+    });
+    
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      const errorMessage = 
+        errors.businessName?.[0] ||
+        errors.contactName?.[0] ||
+        errors.email?.[0] ||
+        errors.phone?.[0] ||
+        errors.website?.[0] ||
+        errors.description?.[0] ||
+        "Please check your input";
+      
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: errorMessage,
+      });
+      return;
+    }
+    
+    setLoading(true);
+    // TODO: Implement vendor application submission (Edge Function with rate limiting)
+    if (import.meta.env.DEV) {
+      console.log("Vendor application data:", result.data);
+    }
+    
+    toast({
+      title: "Application Submitted",
+      description: "Thank you for your interest! We'll review your application and contact you soon.",
+    });
+    
+    setBusinessName("");
+    setContactName("");
+    setEmail("");
+    setPhone("");
+    setWebsite("");
+    setDescription("");
+    setLoading(false);
   };
 
   return (
@@ -86,14 +153,14 @@ const BecomeVendor = () => {
                 "Real-time sales analytics and reports",
                 "Inventory tracking and alerts",
                 "Multiple payment options",
-                "Promotional tools and campaigns",
-                "Customer messaging system",
-                "Order fulfillment support",
-                "Marketing and SEO tools"
+                "Integrated shipping solutions",
+                "Marketing and promotion tools",
+                "Customer relationship management",
+                "Mobile app for on-the-go management",
               ].map((feature, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-success shrink-0 mt-1" />
-                  <span className="text-lg">{feature}</span>
+                  <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-muted-foreground">{feature}</span>
                 </div>
               ))}
             </div>
@@ -104,49 +171,98 @@ const BecomeVendor = () => {
         <section id="apply" className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">Apply to Become a Vendor</h2>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">Apply to Become a Vendor</h2>
+                <p className="text-muted-foreground">
+                  Fill out the form below and our team will review your application
+                </p>
+              </div>
+
               <Card>
                 <CardContent className="pt-6">
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="businessName">Business Name *</Label>
+                      <Input
+                        id="businessName"
+                        value={businessName}
+                        onChange={(e) => setBusinessName(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="contactName">Contact Name *</Label>
+                      <Input
+                        id="contactName"
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        required
+                      />
+                    </div>
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input id="firstName" required />
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input id="lastName" required />
+                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="+1234567890"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          required
+                        />
                       </div>
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" required />
+                      <Label htmlFor="website">Website (Optional)</Label>
+                      <Input
+                        id="website"
+                        type="url"
+                        placeholder="https://example.com"
+                        value={website}
+                        onChange={(e) => setWebsite(e.target.value)}
+                      />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" type="tel" required />
+                      <Label htmlFor="description">Tell us about your business *</Label>
+                      <Textarea
+                        id="description"
+                        rows={6}
+                        placeholder="Describe your products, business model, and why you want to sell on Shoppix"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                      />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="businessName">Business Name</Label>
-                      <Input id="businessName" required />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="productCategory">Product Category</Label>
-                      <Input id="productCategory" placeholder="e.g., Electronics, Fashion, Home & Garden" required />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="description">Tell us about your business</Label>
-                      <Textarea id="description" rows={4} required />
-                    </div>
-                    <Button type="submit" className="w-full gradient-primary">
-                      Submit Application
-                    </Button>
-                    <p className="text-sm text-muted-foreground text-center">
-                      Already have an account?{" "}
-                      <Link to="/auth" className="text-primary hover:underline">
-                        Sign in here
+
+                    <div className="text-sm text-muted-foreground">
+                      By submitting this form, you agree to our{" "}
+                      <Link to="/terms" className="text-primary hover:underline">
+                        Terms of Service
+                      </Link>{" "}
+                      and{" "}
+                      <Link to="/privacy" className="text-primary hover:underline">
+                        Privacy Policy
                       </Link>
-                    </p>
+                      .
+                    </div>
+
+                    <Button type="submit" size="lg" className="w-full gradient-primary" disabled={loading}>
+                      {loading ? "Submitting..." : "Submit Application"}
+                    </Button>
                   </form>
                 </CardContent>
               </Card>

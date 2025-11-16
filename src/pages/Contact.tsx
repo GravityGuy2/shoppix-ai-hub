@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,11 +7,67 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  subject: z.string().trim().min(1, "Subject is required").max(200, "Subject must be less than 200 characters"),
+  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+});
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement contact form submission
+    
+    const result = contactSchema.safeParse({
+      name,
+      email,
+      subject,
+      message,
+    });
+    
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      const errorMessage = 
+        errors.name?.[0] ||
+        errors.email?.[0] ||
+        errors.subject?.[0] ||
+        errors.message?.[0] ||
+        "Please check your input";
+      
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: errorMessage,
+      });
+      return;
+    }
+    
+    setLoading(true);
+    // TODO: Implement contact form submission (Edge Function with rate limiting)
+    if (import.meta.env.DEV) {
+      console.log("Contact form data:", result.data);
+    }
+    
+    toast({
+      title: "Message Received",
+      description: "Thank you for contacting us. We'll get back to you soon!",
+    });
+    
+    setName("");
+    setEmail("");
+    setSubject("");
+    setMessage("");
+    setLoading(false);
   };
 
   return (
@@ -36,23 +93,45 @@ const Contact = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Full Name</Label>
-                          <Input id="name" required />
+                          <Input
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="email">Email Address</Label>
-                          <Input id="email" type="email" required />
+                          <Input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                          />
                         </div>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="subject">Subject</Label>
-                        <Input id="subject" required />
+                        <Input
+                          id="subject"
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                          required
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="message">Message</Label>
-                        <Textarea id="message" rows={6} required />
+                        <Textarea
+                          id="message"
+                          rows={6}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          required
+                        />
                       </div>
-                      <Button type="submit" className="w-full gradient-primary">
-                        Send Message
+                      <Button type="submit" className="w-full gradient-primary" disabled={loading}>
+                        {loading ? "Sending..." : "Send Message"}
                       </Button>
                     </form>
                   </CardContent>
@@ -95,8 +174,8 @@ const Contact = () => {
                     <Clock className="h-10 w-10 text-primary mb-4" />
                     <h3 className="font-semibold text-lg mb-2">Business Hours</h3>
                     <p className="text-muted-foreground">
-                      Monday - Friday: 9am - 6pm<br />
-                      Saturday: 10am - 4pm<br />
+                      Monday - Friday: 9:00 AM - 6:00 PM<br />
+                      Saturday: 10:00 AM - 4:00 PM<br />
                       Sunday: Closed
                     </p>
                   </CardContent>
