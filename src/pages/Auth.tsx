@@ -6,6 +6,29 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+
+const loginSchema = z.object({
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  password: z.string().min(1, "Password is required"),
+});
+
+const signupSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
+  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  password: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .max(100, "Password must be less than 100 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +41,7 @@ const Auth = () => {
   const [signupConfirm, setSignupConfirm] = useState("");
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (user) {
@@ -27,21 +51,63 @@ const Auth = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const result = loginSchema.safeParse({
+      email: loginEmail,
+      password: loginPassword,
+    });
+    
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: errors.email?.[0] || errors.password?.[0] || "Please check your input",
+      });
+      return;
+    }
+    
     setIsLoading(true);
-    await signIn(loginEmail, loginPassword);
+    await signIn(result.data.email, result.data.password);
     setIsLoading(false);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (signupPassword !== signupConfirm) {
-      alert("Passwords don't match!");
+    const result = signupSchema.safeParse({
+      firstName: signupFirstName,
+      lastName: signupLastName,
+      email: signupEmail,
+      password: signupPassword,
+      confirmPassword: signupConfirm,
+    });
+    
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      const errorMessage = 
+        errors.firstName?.[0] ||
+        errors.lastName?.[0] ||
+        errors.email?.[0] ||
+        errors.password?.[0] ||
+        errors.confirmPassword?.[0] ||
+        "Please check your input";
+      
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: errorMessage,
+      });
       return;
     }
 
     setIsLoading(true);
-    await signUp(signupEmail, signupPassword, signupFirstName, signupLastName);
+    await signUp(
+      result.data.email,
+      result.data.password,
+      result.data.firstName,
+      result.data.lastName
+    );
     setIsLoading(false);
   };
 
@@ -146,6 +212,9 @@ const Auth = () => {
                       onChange={(e) => setSignupPassword(e.target.value)}
                       required
                     />
+                    <p className="text-xs text-muted-foreground">
+                      Must be at least 8 characters with uppercase, lowercase, and number
+                    </p>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="signup-confirm">Confirm Password</Label>

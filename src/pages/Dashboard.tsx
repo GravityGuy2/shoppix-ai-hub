@@ -11,6 +11,13 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { z } from "zod";
+
+const profileSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
+  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
+  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number format").optional().or(z.literal("")),
+});
 
 const Dashboard = () => {
   const { user, loading: authLoading } = useAuth();
@@ -49,7 +56,9 @@ const Dashboard = () => {
       setLastName(data.last_name || "");
       setPhone(data.phone || "");
     } catch (error: any) {
-      console.error("Error fetching profile:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error fetching profile:", error);
+      }
     } finally {
       setLoading(false);
     }
@@ -57,15 +66,38 @@ const Dashboard = () => {
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const result = profileSchema.safeParse({
+      firstName,
+      lastName,
+      phone,
+    });
+
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors;
+      const errorMessage = 
+        errors.firstName?.[0] ||
+        errors.lastName?.[0] ||
+        errors.phone?.[0] ||
+        "Please check your input";
+      
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: errorMessage,
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
       const { error } = await supabase
         .from("profiles")
         .update({
-          first_name: firstName,
-          last_name: lastName,
-          phone: phone,
+          first_name: result.data.firstName,
+          last_name: result.data.lastName,
+          phone: result.data.phone || null,
         })
         .eq("id", user?.id);
 
@@ -78,10 +110,13 @@ const Dashboard = () => {
 
       fetchProfile();
     } catch (error: any) {
+      if (import.meta.env.DEV) {
+        console.error("Error updating profile:", error);
+      }
       toast({
         variant: "destructive",
         title: "Update failed",
-        description: error.message,
+        description: "Failed to update profile. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -146,8 +181,13 @@ const Dashboard = () => {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" value={profile?.email || ""} disabled />
-                      <p className="text-sm text-muted-foreground">
+                      <Input
+                        id="email"
+                        type="email"
+                        value={profile?.email || ""}
+                        disabled
+                      />
+                      <p className="text-xs text-muted-foreground">
                         Email cannot be changed
                       </p>
                     </div>
@@ -156,12 +196,16 @@ const Dashboard = () => {
                       <Input
                         id="phone"
                         type="tel"
+                        placeholder="+1234567890"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                       />
+                      <p className="text-xs text-muted-foreground">
+                        Format: +[country code][number] (e.g., +1234567890)
+                      </p>
                     </div>
-                    <Button type="submit" className="gradient-primary" disabled={loading}>
-                      {loading ? "Saving..." : "Save Changes"}
+                    <Button type="submit" disabled={loading} className="gradient-primary">
+                      {loading ? "Updating..." : "Update Profile"}
                     </Button>
                   </form>
                 </CardContent>

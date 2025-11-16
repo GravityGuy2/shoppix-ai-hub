@@ -40,7 +40,9 @@ const DashboardWishlist = () => {
       if (error) throw error;
       setWishlist(data || []);
     } catch (error: any) {
-      console.error("Error fetching wishlist:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error fetching wishlist:", error);
+      }
     } finally {
       setLoading(false);
     }
@@ -62,10 +64,13 @@ const DashboardWishlist = () => {
 
       fetchWishlist();
     } catch (error: any) {
+      if (import.meta.env.DEV) {
+        console.error("Error removing item:", error);
+      }
       toast({
         variant: "destructive",
         title: "Failed to remove",
-        description: error.message,
+        description: "Failed to remove item. Please try again.",
       });
     }
   };

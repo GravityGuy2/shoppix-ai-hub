@@ -38,7 +38,9 @@ const DashboardOrders = () => {
       if (error) throw error;
       setOrders(data || []);
     } catch (error: any) {
-      console.error("Error fetching orders:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error fetching orders:", error);
+      }
     } finally {
       setLoading(false);
     }
