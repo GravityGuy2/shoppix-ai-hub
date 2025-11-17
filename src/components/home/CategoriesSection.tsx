@@ -28,12 +28,12 @@ export const CategoriesSection = () => {
               <Link
                 key={category.name}
                 to={category.link}
-                className="group flex flex-col items-center gap-3 p-6 bg-card rounded-xl hover-lift shadow-soft hover:shadow-glow transition-smooth"
+                className="group flex flex-col items-center gap-3 p-6 bg-card rounded-xl shadow-md hover:shadow-[0_0_32px_hsl(var(--primary)/0.2)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className={`h-16 w-16 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center`}>
                   <Icon className="h-8 w-8 text-white" />
                 </div>
-                <span className="text-sm font-medium text-center group-hover:text-primary transition-smooth">
+                <span className="text-sm font-medium text-center group-hover:text-primary transition-all duration-300 ease-in-out">
                   {category.name}
                 </span>
               </Link>

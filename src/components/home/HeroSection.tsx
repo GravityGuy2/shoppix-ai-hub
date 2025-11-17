@@ -26,13 +26,13 @@ export const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="gradient-primary hover-lift" asChild>
+            <Button size="lg" className="bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg text-white" asChild>
               <Link to="/products">
                 Start Shopping
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="hover-lift" asChild>
+            <Button size="lg" variant="outline" className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg" asChild>
               <Link to="/vendor">Become a Vendor</Link>
             </Button>
           </div>

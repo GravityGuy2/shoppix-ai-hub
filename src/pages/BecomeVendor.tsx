@@ -260,9 +260,9 @@ const BecomeVendor = () => {
                       .
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full gradient-primary" disabled={loading}>
-                      {loading ? "Submitting..." : "Submit Application"}
-                    </Button>
+                      <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 text-white" disabled={loading}>
+                        {loading ? "Submitting..." : "Submit Application"}
+                      </Button>
                   </form>
                 </CardContent>
               </Card>

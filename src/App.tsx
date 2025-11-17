@@ -21,6 +21,8 @@ import Returns from "./pages/Returns";
 import Shipping from "./pages/Shipping";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import ResetPassword from "./pages/ResetPassword";
+import UpdatePassword from "./pages/UpdatePassword";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/returns" element={<Returns />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/update-password" element={<UpdatePassword />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

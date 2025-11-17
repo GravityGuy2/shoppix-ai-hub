@@ -164,8 +164,13 @@ const Auth = () => {
                   >
                     {isLoading ? "Signing in..." : "Sign In"}
                   </Button>
-                </form>
-              </TabsContent>
+                    <div className="text-center text-sm">
+                      <Link to="/reset-password" className="text-primary hover:underline">
+                        Forgot password?
+                      </Link>
+                    </div>
+                  </form>
+                </TabsContent>
 
               <TabsContent value="signup">
                 <form onSubmit={handleSignup} className="space-y-4">

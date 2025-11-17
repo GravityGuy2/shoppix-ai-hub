@@ -9,7 +9,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg gradient-primary" />
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)]" />
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Shoppix
               </span>
@@ -18,16 +18,16 @@ export const Footer = () => {
               Your trusted marketplace for quality products from verified vendors worldwide.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-smooth">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 ease-in-out">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-smooth">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 ease-in-out">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-smooth">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 ease-in-out">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-smooth">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 ease-in-out">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
