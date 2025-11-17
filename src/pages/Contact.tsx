@@ -130,7 +130,7 @@ const Contact = () => {
                           required
                         />
                       </div>
-                      <Button type="submit" className="w-full gradient-primary" disabled={loading}>
+                      <Button type="submit" className="w-full bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 text-white" disabled={loading}>
                         {loading ? "Sending..." : "Send Message"}
                       </Button>
                     </form>

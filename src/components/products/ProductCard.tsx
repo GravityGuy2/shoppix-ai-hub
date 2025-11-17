@@ -33,20 +33,20 @@ export const ProductCard = ({
   const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
 
   return (
-    <div className="group bg-card rounded-xl overflow-hidden shadow-soft hover:shadow-glow hover-lift transition-smooth">
+    <div className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-[0_0_32px_hsl(var(--primary)/0.2)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
       <Link to={`/products/${id}`} className="relative block aspect-square overflow-hidden bg-muted">
         <img
           src={image}
           alt={name}
-          className="h-full w-full object-cover group-hover:scale-110 transition-smooth"
+          className="h-full w-full object-cover group-hover:scale-110 transition-all duration-300 ease-in-out"
         />
         {onSale && discount > 0 && (
-          <Badge className="absolute top-3 left-3 badge-sale">
+          <Badge className="absolute top-3 left-3 bg-[hsl(35,95%,60%)] text-white text-xs font-bold px-2 py-1">
             -{discount}%
           </Badge>
         )}
         {isNew && (
-          <Badge className="absolute top-3 right-3 badge-new">
+          <Badge className="absolute top-3 right-3 bg-[hsl(280,60%,55%)] text-white text-xs font-bold px-2 py-1">
             NEW
           </Badge>
         )}
@@ -65,7 +65,7 @@ export const ProductCard = ({
 
       <div className="p-4 space-y-3">
         <Link to={`/products/${id}`}>
-          <h3 className="font-semibold line-clamp-2 hover:text-primary transition-smooth">
+          <h3 className="font-semibold line-clamp-2 hover:text-primary transition-all duration-300 ease-in-out">
             {name}
           </h3>
         </Link>
@@ -102,7 +102,7 @@ export const ProductCard = ({
             )}
           </div>
 
-          <Button size="sm" className="gradient-primary" asChild>
+          <Button size="sm" className="bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 text-white" asChild>
             <Link to={`/products/${id}`}>
               <ShoppingCart className="h-4 w-4" />
             </Link>
