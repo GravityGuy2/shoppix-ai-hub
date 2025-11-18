@@ -14,26 +14,26 @@ const categories = [
 
 export const CategoriesSection = () => {
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Shop by Category</h2>
-          <p className="text-muted-foreground">Explore millions of products across all categories</p>
+          <p className="text-gray-600">Explore millions of products across all categories</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {categories.map((category) => {
             const Icon = category.icon;
             return (
               <Link
                 key={category.name}
                 to={category.link}
-                className="group flex flex-col items-center gap-3 p-6 bg-card rounded-xl shadow-md hover:shadow-[0_0_32px_hsl(var(--primary)/0.2)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg"
+                className="group flex flex-col items-center gap-3 p-6 bg-white rounded-xl shadow-md hover:shadow-[0_8px_32px_rgba(6,182,212,0.2)] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className={`h-16 w-16 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center`}>
-                  <Icon className="h-8 w-8 text-white" />
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center transition-all duration-300 ease-in-out group-hover:scale-110`}>
+                  <Icon className="w-8 h-8 text-white" />
                 </div>
-                <span className="text-sm font-medium text-center group-hover:text-primary transition-all duration-300 ease-in-out">
+                <span className="text-sm font-medium text-center group-hover:text-cyan-500 transition-all duration-300 ease-in-out">
                   {category.name}
                 </span>
               </Link>
