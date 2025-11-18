@@ -112,16 +112,16 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-500/10 via-white to-purple-500/10 p-4">
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center space-x-2 mb-8">
-          <div className="h-10 w-10 rounded-lg gradient-primary" />
-          <span className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600" />
+          <span className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">
             Shoppix
           </span>
         </Link>
 
-        <Card className="shadow-glow">
+        <Card className="shadow-[0_0_32px_rgba(6,182,212,0.2)]">
           <CardHeader>
             <CardTitle className="text-2xl">Welcome</CardTitle>
             <CardDescription>Sign in to your account or create a new one</CardDescription>
@@ -159,13 +159,13 @@ const Auth = () => {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full gradient-primary"
+                    className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white hover:opacity-90"
                     disabled={isLoading}
                   >
                     {isLoading ? "Signing in..." : "Sign In"}
                   </Button>
                     <div className="text-center text-sm">
-                      <Link to="/reset-password" className="text-primary hover:underline">
+                      <Link to="/reset-password" className="text-cyan-500 hover:underline">
                         Forgot password?
                       </Link>
                     </div>
@@ -217,7 +217,7 @@ const Auth = () => {
                       onChange={(e) => setSignupPassword(e.target.value)}
                       required
                     />
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-gray-600">
                       Must be at least 8 characters with uppercase, lowercase, and number
                     </p>
                   </div>
@@ -234,7 +234,7 @@ const Auth = () => {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full gradient-primary"
+                    className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white hover:opacity-90"
                     disabled={isLoading}
                   >
                     {isLoading ? "Creating account..." : "Create Account"}

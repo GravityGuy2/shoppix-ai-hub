@@ -84,10 +84,10 @@ export default function UpdatePassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-      <Card className="w-full max-w-md shadow-[0_0_32px_hsl(var(--primary)/0.2)]">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-cyan-500/10 via-white to-purple-500/10">
+      <Card className="w-full max-w-md shadow-[0_0_32px_rgba(6,182,212,0.2)]">
         <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto h-12 w-12 rounded-lg bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] flex items-center justify-center">
+          <div className="mx-auto h-12 w-12 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600 flex items-center justify-center">
             <Lock className="h-6 w-6 text-white" />
           </div>
           <CardTitle className="text-2xl">Update Password</CardTitle>
@@ -108,7 +108,7 @@ export default function UpdatePassword() {
                 required
                 maxLength={100}
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-600">
                 Min 8 characters, with uppercase, lowercase, and number
               </p>
             </div>
@@ -128,7 +128,7 @@ export default function UpdatePassword() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 transition-opacity"
+              className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white hover:opacity-90 transition-opacity"
               disabled={loading}
             >
               {loading ? "Updating..." : "Update Password"}
