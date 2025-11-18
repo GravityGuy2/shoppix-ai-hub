@@ -28,14 +28,14 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4">
         {/* Top Bar */}
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)]" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600" />
+            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">
               Shoppix
             </span>
           </Link>
@@ -43,7 +43,7 @@ export const Header = () => {
           {/* Search Bar - Desktop */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-2xl">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <Input
                 type="search"
                 placeholder="Search for products, brands, and categories..."
@@ -120,7 +120,7 @@ export const Header = () => {
         {/* Search Bar - Mobile */}
         <form onSubmit={handleSearch} className="pb-3 md:hidden">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <Input
               type="search"
               placeholder="Search products..."
@@ -133,10 +133,10 @@ export const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 space-y-2 border-t">
+          <div className="md:hidden py-4 space-y-2 border-t border-gray-200">
             <Link
               to="/dashboard/wishlist"
-              className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-all duration-300 ease-in-out"
               onClick={() => setIsMenuOpen(false)}
             >
               <Heart className="h-5 w-5" />
@@ -146,7 +146,7 @@ export const Header = () => {
               <>
                 <Link
                   to="/dashboard"
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-all duration-300 ease-in-out"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <User className="h-5 w-5" />
@@ -157,7 +157,7 @@ export const Header = () => {
                     setIsMenuOpen(false);
                     signOut();
                   }}
-                  className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth w-full text-left"
+                  className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-all duration-300 ease-in-out w-full text-left"
                 >
                   <LogOut className="h-5 w-5" />
                   <span>Sign Out</span>
@@ -166,7 +166,7 @@ export const Header = () => {
             ) : (
               <Link
                 to="/auth"
-                className="flex items-center gap-2 px-4 py-2 hover:bg-muted rounded-lg transition-smooth"
+                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-all duration-300 ease-in-out"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <User className="h-5 w-5" />
