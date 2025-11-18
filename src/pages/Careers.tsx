@@ -48,10 +48,10 @@ const Careers = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <section className="py-20 bg-gradient-to-br from-cyan-500/10 via-white to-purple-500/10">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Team</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Help us build the future of e-commerce and empower millions of buyers and sellers worldwide
             </p>
           </div>
@@ -60,39 +60,39 @@ const Careers = () => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              <Card className="hover-lift">
+              <Card className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
                 <CardContent className="pt-6 text-center">
-                  <Users className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <Users className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Amazing Team</h3>
-                  <p className="text-muted-foreground">Work with talented, passionate people from around the world</p>
+                  <p className="text-gray-600">Work with talented, passionate people from around the world</p>
                 </CardContent>
               </Card>
-              <Card className="hover-lift">
+              <Card className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
                 <CardContent className="pt-6 text-center">
-                  <TrendingUp className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <TrendingUp className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Growth</h3>
-                  <p className="text-muted-foreground">Continuous learning and career development opportunities</p>
+                  <p className="text-gray-600">Continuous learning and career development opportunities</p>
                 </CardContent>
               </Card>
-              <Card className="hover-lift">
+              <Card className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
                 <CardContent className="pt-6 text-center">
-                  <Heart className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <Heart className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Great Benefits</h3>
-                  <p className="text-muted-foreground">Comprehensive health, wellness, and work-life balance perks</p>
+                  <p className="text-gray-600">Comprehensive health, wellness, and work-life balance perks</p>
                 </CardContent>
               </Card>
-              <Card className="hover-lift">
+              <Card className="transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg">
                 <CardContent className="pt-6 text-center">
-                  <Briefcase className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <Briefcase className="h-12 w-12 text-cyan-500 mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Impact</h3>
-                  <p className="text-muted-foreground">Make a real difference in how people shop and sell online</p>
+                  <p className="text-gray-600">Make a real difference in how people shop and sell online</p>
                 </CardContent>
               </Card>
             </div>
 
             <div className="max-w-4xl mx-auto mb-16">
               <h2 className="text-3xl font-bold mb-6 text-center">Life at Shoppix</h2>
-              <div className="space-y-4 text-muted-foreground text-center max-w-3xl mx-auto">
+              <div className="space-y-4 text-gray-600 text-center max-w-3xl mx-auto">
                 <p>
                   At Shoppix, we're building more than just a marketplace—we're creating a global community that connects people through commerce. Our team is diverse, innovative, and committed to excellence.
                 </p>

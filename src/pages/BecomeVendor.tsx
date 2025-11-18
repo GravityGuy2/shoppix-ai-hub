@@ -86,13 +86,13 @@ const BecomeVendor = () => {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-accent/10 py-20">
+        <section className="bg-gradient-to-br from-cyan-500/10 via-white to-purple-500/10 py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Start Selling on Shoppix</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
               Join thousands of successful vendors and reach millions of customers worldwide
             </p>
-            <Button size="lg" className="gradient-primary" asChild>
+            <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white hover:opacity-90" asChild>
               <a href="#apply">Apply Now</a>
             </Button>
           </div>
@@ -144,7 +144,7 @@ const BecomeVendor = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Vendor Features</h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -159,8 +159,8 @@ const BecomeVendor = () => {
                 "Mobile app for on-the-go management",
               ].map((feature, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground">{feature}</span>
+                  <CheckCircle className="h-6 w-6 text-cyan-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-600">{feature}</span>
                 </div>
               ))}
             </div>
@@ -173,7 +173,7 @@ const BecomeVendor = () => {
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-4">Apply to Become a Vendor</h2>
-                <p className="text-muted-foreground">
+                <p className="text-gray-600">
                   Fill out the form below and our team will review your application
                 </p>
               </div>
@@ -248,19 +248,19 @@ const BecomeVendor = () => {
                       />
                     </div>
 
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-sm text-gray-600">
                       By submitting this form, you agree to our{" "}
-                      <Link to="/terms" className="text-primary hover:underline">
+                      <Link to="/terms" className="text-cyan-500 hover:underline">
                         Terms of Service
                       </Link>{" "}
                       and{" "}
-                      <Link to="/privacy" className="text-primary hover:underline">
+                      <Link to="/privacy" className="text-cyan-500 hover:underline">
                         Privacy Policy
                       </Link>
                       .
                     </div>
 
-                      <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-[hsl(185,85%,45%)] to-[hsl(185,90%,60%)] hover:opacity-90 text-white" disabled={loading}>
+                      <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 hover:opacity-90 text-white" disabled={loading}>
                         {loading ? "Submitting..." : "Submit Application"}
                       </Button>
                   </form>

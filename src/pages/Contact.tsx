@@ -74,10 +74,10 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
-        <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <section className="py-20 bg-gradient-to-br from-cyan-500/10 via-white to-purple-500/10">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">Contact Us</h1>
-            <p className="text-xl text-center text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-center text-gray-600 max-w-2xl mx-auto">
               Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
             </p>
           </div>
